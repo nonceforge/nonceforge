@@ -18,7 +18,7 @@ const config = getDefaultConfig({
   appName: "NonceForge",
   projectId: "e8b285ca89548e57b3d9e4e7ad19c129",
   chains: [base],
-  ssr: true,
+  ssr: false,
 });
 
 const queryClient = new QueryClient();
