@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import MiningDashboard from "@/components/MiningDashboard";
 import Leaderboard from "@/components/Leaderboard";
 import Tokenomics from "@/components/Tokenomics";
 import DocsContent from "@/components/DocsContent";
 
-export default function MiningTabs() {
+function MiningTabsContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [activeTab, setActiveTab] = useState("mining");
 
   const tabs = [
@@ -17,13 +21,26 @@ export default function MiningTabs() {
     { id: "docs", label: "Docs" },
   ];
 
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+
+    if (tab && tabs.some((item) => item.id === tab)) {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+    router.push(`/mining?tab=${tabId}`);
+  };
+
   return (
     <section>
       <div className="mb-8 flex flex-wrap gap-3">
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabClick(tab.id)}
             className={`rounded-2xl px-5 py-3 font-semibold transition-all duration-300 ${
               activeTab === tab.id
                 ? "bg-green-400 text-black shadow-[0_0_35px_rgba(34,197,94,0.7)]"
@@ -37,13 +54,18 @@ export default function MiningTabs() {
 
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
         {activeTab === "mining" && <MiningDashboard />}
-
         {activeTab === "leaderboard" && <Leaderboard />}
-
         {activeTab === "tokenomics" && <Tokenomics />}
-
         {activeTab === "docs" && <DocsContent />}
       </div>
     </section>
+  );
+}
+
+export default function MiningTabs() {
+  return (
+    <Suspense fallback={null}>
+      <MiningTabsContent />
+    </Suspense>
   );
 }
