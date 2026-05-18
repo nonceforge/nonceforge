@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import WalletConnectButton from "./WalletConnectButton";
 
 export default function AppNavbar() {
   return (
@@ -16,10 +15,6 @@ export default function AppNavbar() {
           <Link href="/leaderboard" className="hover:text-lime-400">Leaderboard</Link>
           <Link href="/tokenomics" className="hover:text-lime-400">Tokenomics</Link>
           <Link href="/docs" className="hover:text-lime-400">Docs</Link>
-        </div>
-
-        <div className="absolute right-4 top-1/2 z-[99999] -translate-y-1/2 pointer-events-auto">
-          <WalletConnectButton />
         </div>
       </div>
     </nav>
