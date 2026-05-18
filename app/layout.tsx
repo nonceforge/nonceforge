@@ -1,10 +1,11 @@
 import "./globals.css";
-import { WalletProvider } from "@/lib/wallet";
-import PageTransition from "@/components/PageTransition";
 
 export const metadata = {
   title: "NonceForge",
   description: "Fair Launch Browser Mining Protocol",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -14,11 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <WalletProvider>
-          <PageTransition>{children}</PageTransition>
-        </WalletProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
