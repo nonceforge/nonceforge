@@ -18,7 +18,9 @@ export default function AppNavbar() {
           <Link href="/docs" className="hover:text-lime-400">Docs</Link>
         </div>
 
-        <WalletConnectButton />
+        <div className="flex min-w-[120px] justify-end">
+          <WalletConnectButton />
+        </div>
       </div>
     </nav>
   );
