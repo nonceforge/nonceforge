@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { WalletProvider } from "@/lib/wallet";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "NonceForge",
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <WalletProvider>
+          <PageTransition>{children}</PageTransition>
+        </WalletProvider>
+      </body>
     </html>
   );
 }
