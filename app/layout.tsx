@@ -1,6 +1,9 @@
 import "./globals.css";
+import type { Metadata } from "next";
+import { WalletProvider } from "@/lib/wallet";
+import PageTransition from "@/components/PageTransition";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "NonceForge",
   description: "Fair Launch Browser Mining Protocol",
   icons: {
@@ -10,12 +13,16 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <WalletProvider>
+          <PageTransition>{children}</PageTransition>
+        </WalletProvider>
+      </body>
     </html>
   );
 }
