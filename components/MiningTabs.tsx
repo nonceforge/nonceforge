@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 import MiningDashboard from "@/components/MiningDashboard";
 import Leaderboard from "@/components/Leaderboard";
@@ -9,17 +8,7 @@ import Tokenomics from "@/components/Tokenomics";
 import DocsContent from "@/components/DocsContent";
 
 export default function MiningTabs() {
-  const searchParams = useSearchParams();
-
   const [activeTab, setActiveTab] = useState("mining");
-
-  useEffect(() => {
-    const tab = searchParams.get("tab");
-
-    if (tab) {
-      setActiveTab(tab);
-    }
-  }, [searchParams]);
 
   const tabs = [
     { id: "mining", label: "Mining" },
