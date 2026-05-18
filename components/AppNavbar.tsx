@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import WalletConnectButton from "./WalletConnectButton";
 
 export default function AppNavbar() {
   return (
@@ -18,7 +18,7 @@ export default function AppNavbar() {
           <Link href="/docs" className="hover:text-lime-400">Docs</Link>
         </div>
 
-        <ConnectButton />
+        <WalletConnectButton />
       </div>
     </nav>
   );

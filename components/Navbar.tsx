@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import WalletConnectButton from "./WalletConnectButton";
 
 export default function Navbar() {
   return (
@@ -11,7 +11,7 @@ export default function Navbar() {
           NONCE<span className="text-lime-400">FORGE</span>
         </Link>
 
-        <ConnectButton />
+        <WalletConnectButton />
       </div>
     </nav>
   );
