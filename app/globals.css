@@ -50,3 +50,13 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+button,
+a {
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
