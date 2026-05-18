@@ -1,32 +1,14 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import LaunchButton from "@/components/LaunchButton";
-
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white">
-      <Navbar />
+    <main className="min-h-screen bg-black p-10 text-white">
+      <h1 className="text-4xl font-bold text-green-400">
+        NonceForge Mobile Test
+      </h1>
 
-      <section className="flex min-h-[85vh] items-center justify-center px-6">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-green-400">
-            Proof of Work Mining
-          </p>
-
-          <h1 className="mb-6 text-5xl font-bold md:text-7xl">
-            NonceForge
-          </h1>
-
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-400">
-            Mine blocks, compete on the leaderboard, and earn rewards through
-            a wallet-powered mining dashboard.
-          </p>
-
-          <LaunchButton />
-        </div>
-      </section>
-
-      <Footer />
+      <p className="mt-4 text-gray-300">
+        If you can see this on mobile, the problem is inside the homepage
+        components, not Vercel or Next.js.
+      </p>
     </main>
   );
 }
