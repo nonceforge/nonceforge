@@ -42,6 +42,7 @@ The project focuses on:
 
 # Project Structure
 
+```bash
 web/
 ├── app/
 │   ├── mining/
@@ -67,8 +68,7 @@ web/
 ├── public/
 │
 └── README.md
-
----
+```
 
 # Installation
 
