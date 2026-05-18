@@ -1,36 +1,191 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NonceForge
 
-## Getting Started
+NonceForge is a browser-based proof-of-work mining protocol built on Base Network.
 
-First, run the development server:
+The project focuses on:
 
-```bash
+* Fair launch mining
+* Browser mining accessibility
+* Epoch-based reward reduction
+* Fixed supply distribution
+* Competitive nonce discovery
+
+---
+
+# Features
+
+* Next.js 16 + App Router
+* TailwindCSS UI
+* RainbowKit Wallet Connect
+* WalletConnect integration
+* Mining dashboard
+* Epoch progression system
+* Leaderboard UI
+* Tokenomics page
+* Documentation page
+* Browser mining interface
+* Live mining activity UI
+
+---
+
+# Tech Stack
+
+* Next.js
+* React
+* TailwindCSS
+* RainbowKit
+* Wagmi
+* Viem
+* TypeScript
+
+---
+
+# Project Structure
+
+web/
+├── app/
+│   ├── mining/
+│   ├── leaderboard/
+│   ├── tokenomics/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+│
+├── components/
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   ├── MiningTabs.tsx
+│   ├── MiningDashboard.tsx
+│   ├── MiningActivity.tsx
+│   ├── Leaderboard.tsx
+│   ├── Tokenomics.tsx
+│   └── DocsContent.tsx
+│
+├── lib/
+│   └── wallet.tsx
+│
+├── public/
+│
+└── README.md
+
+---
+
+# Installation
+
+Clone repository:
+
+git clone <repo-url>
+
+Go to project:
+
+cd web
+
+Install dependencies:
+
+npm install
+
+Run development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# WalletConnect Setup
 
-To learn more about Next.js, take a look at the following resources:
+Create WalletConnect Project ID:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://cloud.walletconnect.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Add environment variable:
 
-## Deploy on Vercel
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Mining System
+
+NonceForge uses a browser-based proof-of-work system.
+
+Miners:
+
+* Generate nonce attempts
+* Calculate hashes
+* Submit valid nonces
+* Receive epoch rewards
+
+---
+
+# Epoch Rewards
+
+| Epoch   | Reward  |
+| ------- | ------- |
+| Epoch 1 | 100 NFG |
+| Epoch 2 | 75 NFG  |
+| Epoch 3 | 50 NFG  |
+| Epoch 4 | 25 NFG  |
+| Epoch 5 | 10 NFG  |
+
+Mining rewards decrease over time to reduce inflation and reward early miners.
+
+---
+
+# Supply Model
+
+* Max Supply: 21,000,000 NFG
+* Fixed supply model
+* No unlimited minting
+
+---
+
+# Mining Modes
+
+## Active
+
+* Browser Mining
+
+## Planned
+
+* CPU Mining
+* GPU Mining
+
+---
+
+# Current Status
+
+Frontend UI:
+
+* Complete
+
+Wallet Connection:
+
+* Complete
+
+Mining Simulation:
+
+* Complete
+
+Smart Contract:
+
+* In Progress
+
+Real Mining Backend:
+
+* In Progress
+
+GPU Miner:
+
+* Planned
+
+---
+
+# Disclaimer
+
+NonceForge is experimental blockchain infrastructure.
+
+Mining rewards, liquidity, and token value are not guaranteed.
+
+Always do your own research before participating.
