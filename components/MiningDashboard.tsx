@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import MiningActivity from "@/components/MiningActivity";
 
 export default function MiningDashboard() {
-  const [isMining, setIsMining] = useState(false);
-  const [hashrate, setHashrate] = useState(0);
-  const [nonceChecked, setNonceChecked] = useState(0);
-  const [validNonce, setValidNonce] = useState(0);
   const [selectedMiner, setSelectedMiner] = useState("web");
 
   const totalMined = 0;
+  const hashrate = 0;
+  const nonceChecked = 0;
+  const validNonce = 0;
 
   const formatNumber = (value: number) => {
     return value.toLocaleString("en-US");
@@ -36,26 +35,6 @@ export default function MiningDashboard() {
       (currentEpoch.maxMined - previousLimit)) *
     100;
 
-  useEffect(() => {
-    if (!isMining) {
-      setHashrate(0);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      const baseHashrate = Math.floor(Math.random() * 300) + 100;
-
-      setHashrate(baseHashrate);
-      setNonceChecked((prev) => prev + baseHashrate);
-
-      if (Math.random() > 0.94) {
-        setValidNonce((prev) => prev + 1);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [isMining]);
-
   return (
     <section className="w-full">
       <div className="mb-8">
@@ -68,8 +47,8 @@ export default function MiningDashboard() {
         </h2>
 
         <p className="mt-3 max-w-2xl text-gray-400">
-          Start browser mining, generate hashrate, submit valid nonces, and
-          compete on the leaderboard.
+          Browser mining interface is preparing for launch. Mining will be
+          enabled after smart contract and nonce validation are live.
         </p>
       </div>
 
@@ -93,7 +72,7 @@ export default function MiningDashboard() {
           </p>
 
           <div className="mt-5 inline-flex rounded-full border border-green-400/20 bg-green-400/10 px-4 py-2 text-xs font-semibold text-green-400">
-            ACTIVE
+            GENESIS READY
           </div>
         </button>
 
@@ -134,28 +113,15 @@ export default function MiningDashboard() {
 
       <div className="mb-8 flex flex-wrap gap-4">
         <button
-          onClick={() => setIsMining(true)}
-          disabled={isMining}
-          className={`rounded-2xl px-7 py-4 font-bold transition-all duration-300 ${
-            isMining
-              ? "cursor-not-allowed bg-white/10 text-gray-500"
-              : "bg-green-400 text-black shadow-[0_0_40px_rgba(34,197,94,0.8)] hover:bg-green-300 hover:shadow-[0_0_70px_rgba(34,197,94,1)]"
-          }`}
+          disabled
+          className="cursor-not-allowed rounded-2xl bg-zinc-800 px-7 py-4 font-bold text-zinc-500"
         >
-          Start Mining
+          Mining Launch Soon
         </button>
 
-        <button
-          onClick={() => setIsMining(false)}
-          disabled={!isMining}
-          className={`rounded-2xl px-7 py-4 font-bold transition-all duration-300 ${
-            !isMining
-              ? "cursor-not-allowed border border-white/10 text-gray-500"
-              : "bg-red-500 text-white shadow-[0_0_35px_rgba(239,68,68,0.7)] hover:bg-red-400"
-          }`}
-        >
-          Stop
-        </button>
+        <div className="rounded-2xl border border-green-400/20 bg-green-400/5 px-7 py-4 text-sm font-semibold text-green-400">
+          Smart Contract Pending
+        </div>
       </div>
 
       <div className="grid gap-5 md:grid-cols-3">
@@ -179,23 +145,19 @@ export default function MiningDashboard() {
           </h3>
 
           <p className="mt-2 text-sm text-gray-500">
-            Browser mining performance
+            Browser mining not active yet
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-black/40 p-6">
           <p className="text-sm text-gray-400">Mining Status</p>
 
-          <h3
-            className={`mt-3 text-4xl font-bold ${
-              isMining ? "text-green-400" : "text-yellow-400"
-            }`}
-          >
-            {isMining ? "Mining" : "Idle"}
+          <h3 className="mt-3 text-4xl font-bold text-yellow-400">
+            Pending
           </h3>
 
           <p className="mt-2 text-sm text-gray-500">
-            {isMining ? "Searching valid nonce" : "Waiting to start"}
+            Waiting for contract launch
           </p>
         </div>
       </div>

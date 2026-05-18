@@ -8,10 +8,10 @@ export default function DocsContent() {
 
   const steps = [
     "Connect wallet",
-    "Start browser mining",
+    "Access mining dashboard",
     "Generate nonce",
     "Submit valid proof",
-    "Receive epoch reward",
+    "Claim reward when mining launches",
   ];
 
   return (
@@ -28,8 +28,12 @@ export default function DocsContent() {
         <p className="mt-5 max-w-4xl text-lg text-gray-300">
           NonceForge is a proof-of-work browser mining protocol on Base designed
           for fair launch participation, fixed supply distribution, decreasing
-          emissions, and early miner rewards.
+          emissions, and early miner incentives.
         </p>
+
+        <div className="mt-6 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-5 py-2 text-sm font-semibold text-yellow-300">
+          Genesis Preview • Mining Not Yet Publicly Active
+        </div>
       </div>
 
       <div className="mt-8 grid gap-4 md:grid-cols-4">
@@ -39,63 +43,68 @@ export default function DocsContent() {
             className="rounded-2xl border border-white/10 bg-black/40 p-5"
           >
             <p className="text-sm text-gray-500">{label}</p>
+
             <h3 className="mt-2 text-xl font-bold text-green-400">
               {value}
             </h3>
           </div>
         ))}
       </div>
-<div className="mt-10 rounded-3xl border border-green-400/20 bg-green-400/5 p-7">
-  <h2 className="text-2xl font-bold text-green-400">
-    Mining Fee & Liquidity
-  </h2>
 
-  <p className="mt-4 text-gray-300">
-    When a miner submits a valid nonce, a small mining fee may be required by
-    the protocol. This fee is designed to support liquidity instead of being
-    used as hidden allocation.
-  </p>
+      <div className="mt-10 rounded-3xl border border-green-400/20 bg-green-400/5 p-7">
+        <h2 className="text-2xl font-bold text-green-400">
+          Mining Fee & Liquidity
+        </h2>
 
-  <p className="mt-4 text-gray-300">
-    The goal is to create a more sustainable mining economy where successful
-    mining activity contributes back to the market structure and helps support
-    healthier trading depth for NFG.
-  </p>
+        <p className="mt-4 text-gray-300">
+          When a miner submits a valid nonce, a small protocol mining fee may
+          be required. The fee is designed to support liquidity infrastructure
+          instead of hidden insider allocation.
+        </p>
 
-  <div className="mt-6 grid gap-4 md:grid-cols-3">
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 1</p>
+        <p className="mt-4 text-gray-300">
+          The objective is to create a more sustainable mining economy where
+          mining activity contributes back to liquidity growth and healthier
+          market depth for NFG participants.
+        </p>
 
-      <h3 className="mt-2 text-lg font-bold text-white">
-        Miner Finds Nonce
-      </h3>
-    </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
+            <p className="text-sm text-gray-400">Step 1</p>
 
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 2</p>
+            <h3 className="mt-2 text-lg font-bold text-white">
+              Miner Finds Nonce
+            </h3>
+          </div>
 
-      <h3 className="mt-2 text-lg font-bold text-white">
-        Mining Fee Collected
-      </h3>
-    </div>
+          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
+            <p className="text-sm text-gray-400">Step 2</p>
 
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 3</p>
+            <h3 className="mt-2 text-lg font-bold text-white">
+              Protocol Fee Processed
+            </h3>
+          </div>
 
-      <h3 className="mt-2 text-lg font-bold text-white">
-        Fee Supports Liquidity
-      </h3>
-    </div>
-  </div>
-</div>
+          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
+            <p className="text-sm text-gray-400">Step 3</p>
+
+            <h3 className="mt-2 text-lg font-bold text-white">
+              Liquidity Infrastructure Supported
+            </h3>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">Protocol Overview</h2>
+        <h2 className="text-2xl font-bold text-white">
+          Protocol Overview
+        </h2>
 
         <p className="mt-4 text-gray-400">
           Unlike traditional token launches that depend on private allocation or
-          centralized distribution, NonceForge rewards miners through valid
-          proof submissions. Every browser miner competes to discover nonces
-          that satisfy the active difficulty target.
+          centralized distribution, NonceForge is designed around proof-based
+          participation where miners compete to discover valid nonces that
+          satisfy the active protocol difficulty target.
         </p>
 
         <div className="mt-6 grid gap-5 md:grid-cols-3">
@@ -103,19 +112,21 @@ export default function DocsContent() {
             <h3 className="text-lg font-bold text-green-400">
               Fair Distribution
             </h3>
+
             <p className="mt-3 text-sm text-gray-400">
-              Rewards are earned through mining work, not unlimited minting or
-              hidden free allocation.
+              Rewards are designed to be earned through mining activity rather
+              than hidden free allocation or unlimited minting.
             </p>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
             <h3 className="text-lg font-bold text-green-400">
-              Early Miner Advantage
+              Genesis Epoch
             </h3>
+
             <p className="mt-3 text-sm text-gray-400">
-              Genesis Epoch miners receive the highest reward rate before later
-              epochs reduce emissions.
+              Early protocol participants are expected to benefit from Genesis
+              phase reward structures before future emission reductions.
             </p>
           </div>
 
@@ -123,9 +134,10 @@ export default function DocsContent() {
             <h3 className="text-lg font-bold text-green-400">
               Browser Mining First
             </h3>
+
             <p className="mt-3 text-sm text-gray-400">
-              Genesis launch focuses on browser mining first to keep onboarding
-              simple, accessible, and community-friendly.
+              NonceForge initially focuses on browser accessibility to simplify
+              onboarding and early ecosystem participation.
             </p>
           </div>
         </div>
@@ -137,30 +149,32 @@ export default function DocsContent() {
         </h2>
 
         <p className="mt-4 text-gray-400">
-          NonceForge Genesis launch focuses on browser-based mining to simplify
-          onboarding and allow early community participation directly from the
-          web interface.
+          NonceForge currently operates in Genesis Preview while mining
+          infrastructure, nonce validation, reward mechanics, and protocol
+          security continue to be finalized before public activation.
         </p>
 
         <div className="mt-6 rounded-2xl border border-green-400/20 bg-green-400/5 p-5">
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-400">
-            Genesis Launch
+            Genesis Preview
           </p>
 
           <h3 className="mt-3 text-2xl font-bold text-white">
-            Browser Mining Active
+            Browser Mining Preview
           </h3>
 
           <p className="mt-3 text-sm text-gray-300">
-            Browser mining is planned to be available during the Genesis Epoch
-            while desktop CPU and GPU mining infrastructure continue to be
-            developed for future expansion.
+            Browser mining infrastructure is currently in preview mode while
+            desktop CPU and GPU mining environments continue to be developed for
+            future protocol expansion.
           </p>
         </div>
       </div>
 
       <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">How Mining Works</h2>
+        <h2 className="text-2xl font-bold text-white">
+          How Mining Works
+        </h2>
 
         <div className="mt-6 grid gap-4 md:grid-cols-5">
           {steps.map((step, index) => (
@@ -171,7 +185,10 @@ export default function DocsContent() {
               <p className="text-sm font-bold text-green-400">
                 Step {index + 1}
               </p>
-              <h3 className="mt-2 font-semibold text-white">{step}</h3>
+
+              <h3 className="mt-2 font-semibold text-white">
+                {step}
+              </h3>
             </div>
           ))}
         </div>
@@ -186,18 +203,21 @@ hash must be below target
         ↓
 valid nonce submitted
         ↓
-epoch reward distributed`}
+reward eligibility verified`}
           </pre>
         </div>
       </div>
 
       <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">Miner Modes</h2>
+        <h2 className="text-2xl font-bold text-white">
+          Miner Modes
+        </h2>
 
         <p className="mt-4 text-gray-400">
-          NonceForge currently focuses on browser-based mining for the Genesis
-          launch phase. Additional mining clients for desktop CPU and GPU
-          environments are planned for future protocol expansion.
+          NonceForge currently focuses on browser-based mining infrastructure
+          during the Genesis Preview phase. Additional mining clients for
+          desktop CPU and GPU environments are planned for future protocol
+          expansion.
         </p>
 
         <div className="mt-6 grid gap-5 md:grid-cols-3">
@@ -206,15 +226,17 @@ epoch reward distributed`}
               Browser Mining
             </p>
 
-            <h3 className="mt-3 text-xl font-bold">Active</h3>
+            <h3 className="mt-3 text-xl font-bold">
+              Genesis Preview
+            </h3>
 
             <p className="mt-3 text-sm text-gray-400">
-              Lightweight browser-based mining designed for easy onboarding and
-              Genesis Epoch participation.
+              Lightweight browser-based mining designed for accessible Genesis
+              onboarding and early protocol participation.
             </p>
 
             <div className="mt-5 inline-flex rounded-full border border-green-400/20 bg-green-400/10 px-4 py-2 text-xs font-semibold text-green-400">
-              ACTIVE
+              PREVIEW
             </div>
           </div>
 
@@ -223,7 +245,9 @@ epoch reward distributed`}
               CPU Mining
             </p>
 
-            <h3 className="mt-3 text-xl font-bold">Desktop / VPS</h3>
+            <h3 className="mt-3 text-xl font-bold">
+              Desktop / VPS
+            </h3>
 
             <p className="mt-3 text-sm text-gray-400">
               Dedicated desktop and VPS mining clients are planned for future
@@ -240,7 +264,9 @@ epoch reward distributed`}
               GPU Mining
             </p>
 
-            <h3 className="mt-3 text-xl font-bold">CUDA / OpenCL</h3>
+            <h3 className="mt-3 text-xl font-bold">
+              CUDA / OpenCL
+            </h3>
 
             <p className="mt-3 text-sm text-gray-400">
               High-performance GPU mining infrastructure is planned for advanced
@@ -256,29 +282,40 @@ epoch reward distributed`}
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         <div className="rounded-3xl border border-white/10 bg-black/40 p-7">
-          <h2 className="text-2xl font-bold text-white">Supply Protection</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Supply Protection
+          </h2>
+
           <p className="mt-4 text-gray-400">
-            NonceForge is designed around a fixed maximum supply. The smart
-            contract should prevent minting beyond the 21,000,000 NFG cap.
+            NonceForge is designed around a fixed maximum supply. Smart contract
+            architecture is intended to prevent minting beyond the
+            21,000,000 NFG cap.
           </p>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-black/40 p-7">
-          <h2 className="text-2xl font-bold text-white">Difficulty Control</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Difficulty Control
+          </h2>
+
           <p className="mt-4 text-gray-400">
-            Mining difficulty controls how hard it is to find a valid nonce.
-            Higher difficulty requires more computational work and helps slow
-            excessive emission.
+            Mining difficulty determines how challenging it is to discover a
+            valid nonce. Higher difficulty requires more computational work and
+            helps regulate emission speed.
           </p>
         </div>
       </div>
 
       <div className="mt-10 rounded-3xl border border-yellow-400/20 bg-yellow-400/5 p-7">
-        <h2 className="text-2xl font-bold text-yellow-400">Risk Disclaimer</h2>
+        <h2 className="text-2xl font-bold text-yellow-400">
+          Risk Disclaimer
+        </h2>
+
         <p className="mt-4 text-gray-300">
-          NonceForge is experimental blockchain infrastructure. Mining rewards,
-          token value, liquidity, and market performance are not guaranteed.
-          Users should always do independent research before participating.
+          NonceForge is experimental blockchain infrastructure currently under
+          development. Mining rewards, liquidity conditions, protocol behavior,
+          and token value are not guaranteed. Users should always perform
+          independent research before participating.
         </p>
       </div>
     </div>

@@ -27,14 +27,13 @@ export default function Footer() {
 
           <a
             href="#"
-            target="_blank"
             className="transition-colors duration-300 hover:text-lime-400"
           >
             GitHub (Soon)
           </a>
 
           <Link
-            href="/mining?tab=docs"
+            href="/docs"
             className="transition-colors duration-300 hover:text-lime-400"
           >
             Docs

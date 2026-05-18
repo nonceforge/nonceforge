@@ -1,14 +1,19 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Leaderboard from "@/components/Leaderboard";
+import MiningTabs from "@/components/MiningTabs";
 
 export default function LeaderboardPage() {
   return (
-    <main className="min-h-screen bg-black pt-28 text-white">
-
+    <main className="min-h-screen bg-black text-white">
       <Navbar />
 
-      <Leaderboard />
+      <section className="mx-auto max-w-7xl px-6 py-28">
+        <MiningTabs />
+        <Leaderboard />
+      </section>
 
+      <Footer />
     </main>
   );
 }

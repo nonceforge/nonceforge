@@ -1,71 +1,38 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-
-import MiningDashboard from "@/components/MiningDashboard";
-import Leaderboard from "@/components/Leaderboard";
-import Tokenomics from "@/components/Tokenomics";
-import DocsContent from "@/components/DocsContent";
-
-function MiningTabsContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const [activeTab, setActiveTab] = useState("mining");
-
-  const tabs = [
-    { id: "mining", label: "Mining" },
-    { id: "leaderboard", label: "Leaderboard" },
-    { id: "tokenomics", label: "Tokenomics" },
-    { id: "docs", label: "Docs" },
-  ];
-
-  useEffect(() => {
-    const tab = searchParams.get("tab");
-
-    if (tab && tabs.some((item) => item.id === tab)) {
-      setActiveTab(tab);
-    }
-  }, [searchParams]);
-
-  const handleTabClick = (tabId: string) => {
-    setActiveTab(tabId);
-    router.push(`/mining?tab=${tabId}`);
-  };
-
-  return (
-    <section>
-      <div className="mb-8 flex flex-wrap gap-3">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`rounded-2xl px-5 py-3 font-semibold transition-all duration-300 ${
-              activeTab === tab.id
-                ? "bg-green-400 text-black shadow-[0_0_35px_rgba(34,197,94,0.7)]"
-                : "border border-white/10 bg-white/[0.03] text-gray-300 hover:bg-white/[0.08]"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-        {activeTab === "mining" && <MiningDashboard />}
-        {activeTab === "leaderboard" && <Leaderboard />}
-        {activeTab === "tokenomics" && <Tokenomics />}
-        {activeTab === "docs" && <DocsContent />}
-      </div>
-    </section>
-  );
-}
+import Link from "next/link";
 
 export default function MiningTabs() {
+  const tabs = [
+    {
+      href: "/mining",
+      label: "Mining",
+    },
+    {
+      href: "/leaderboard",
+      label: "Leaderboard",
+    },
+    {
+      href: "/tokenomics",
+      label: "Tokenomics",
+    },
+    {
+      href: "/docs",
+      label: "Docs",
+    },
+  ];
+
   return (
-    <Suspense fallback={null}>
-      <MiningTabsContent />
-    </Suspense>
+    <div className="mb-8 flex flex-wrap gap-3">
+      {tabs.map((tab) => (
+        <Link
+          key={tab.href}
+          href={tab.href}
+          className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 font-semibold text-gray-300 transition-all duration-300 hover:bg-green-400 hover:text-black hover:shadow-[0_0_35px_rgba(34,197,94,0.7)]"
+        >
+          {tab.label}
+        </Link>
+      ))}
+    </div>
   );
 }
