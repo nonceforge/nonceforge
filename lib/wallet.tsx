@@ -1,6 +1,7 @@
 "use client";
 
 import "@rainbow-me/rainbowkit/styles.css";
+
 import {
   getDefaultConfig,
   RainbowKitProvider,
@@ -14,6 +15,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 
+import { ReactNode } from "react";
+
 const config = getDefaultConfig({
   appName: "NonceForge",
   projectId: "e8b285ca89548e57b3d9e4e7ad19c129",
@@ -26,7 +29,7 @@ const queryClient = new QueryClient();
 export function WalletProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <WagmiProvider config={config}>
