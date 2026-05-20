@@ -2,29 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
+import {
+  ArrowRight,
+  Box,
+  Clock3,
+  Droplets,
+  FileText,
+  Globe2,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-black text-white">
-      <Navbar />
+      <header className="fixed left-0 top-0 z-50 flex h-[74px] w-full items-center justify-between border-b border-white/10 bg-black/70 px-8 backdrop-blur-xl">
+        <Link href="/" className="text-2xl font-black tracking-tight">
+          NONCE<span className="text-lime-400">FORGE</span>
+        </Link>
 
-      <section className="relative min-h-screen border-t border-white/10 px-6 pt-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_45%,rgba(132,255,0,0.24),transparent_38%),linear-gradient(90deg,#000_0%,rgba(0,0,0,0.92)_35%,rgba(0,0,0,0.55)_100%)]" />
+        <button className="rounded-full border border-lime-400/60 px-7 py-3 font-bold text-lime-400 shadow-[0_0_25px_rgba(132,255,0,0.35)] transition hover:bg-lime-400 hover:text-black">
+          Connect
+        </button>
+      </header>
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 35 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="z-10"
-          >
-            <p className="mb-6 text-sm font-bold uppercase tracking-[0.45em] text-lime-400">
+      <section className="relative min-h-screen px-8 pt-[120px]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_48%,rgba(132,255,0,0.24),transparent_36%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,#000_33%,rgba(0,0,0,0.35)_100%)]" />
+
+        <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 lg:grid-cols-[520px_1fr]">
+          <div className="z-20">
+            <p className="mb-8 text-sm font-black uppercase tracking-[0.52em] text-lime-400">
               Proof of Work Protocol
             </p>
 
-            <h1 className="text-6xl font-black leading-[1.08] tracking-tight md:text-8xl">
+            <h1 className="text-[72px] font-black leading-[0.96] tracking-tight md:text-[88px]">
               Mine.
               <br />
               Compete.
@@ -32,97 +44,133 @@ export default function Home() {
               Earn.
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg leading-8 text-zinc-300">
+            <p className="mt-8 max-w-[520px] text-lg leading-8 text-zinc-300">
               NonceForge is a browser mining protocol on Base featuring
               epoch-based rewards, nonce competition, and liquidity-backed
               mining economics.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-5">
+            <div className="mt-10 flex gap-5">
               <Link
                 href="/app"
-                className="rounded-2xl bg-lime-400 px-9 py-5 text-lg font-bold text-black shadow-[0_0_35px_rgba(132,255,0,0.45)] transition hover:scale-105 hover:bg-lime-300"
+                className="group flex h-[72px] items-center gap-8 rounded-2xl bg-lime-400 px-9 text-lg font-black text-black shadow-[0_0_45px_rgba(132,255,0,0.45)] transition hover:scale-[1.03] hover:bg-lime-300"
               >
-                Launch App →
+                Launch App
+                <ArrowRight className="h-6 w-6 transition group-hover:translate-x-1" />
               </Link>
 
               <Link
                 href="/docs"
-                className="rounded-2xl border border-white/15 bg-white/5 px-9 py-5 text-lg font-bold text-white transition hover:border-lime-400/60 hover:bg-lime-400/10"
+                className="flex h-[72px] items-center gap-8 rounded-2xl border border-white/15 bg-white/[0.03] px-9 text-lg font-bold text-white backdrop-blur-xl transition hover:border-lime-400/70 hover:bg-lime-400/10"
               >
                 View Docs
+                <FileText className="h-5 w-5 text-lime-400" />
               </Link>
             </div>
 
-            <div className="mt-10 grid max-w-2xl grid-cols-3 gap-4">
-              {[
-                ["Max Supply", "21M"],
-                ["Epochs", "5"],
-                ["Network", "Base"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="rounded-2xl border border-white/10 bg-black/50 p-5 backdrop-blur"
-                >
-                  <p className="text-sm text-zinc-400">{label}</p>
-                  <p className="mt-3 text-2xl font-black">{value}</p>
-                  <div className="mt-5 h-[2px] w-14 bg-lime-400" />
-                </div>
-              ))}
+            <div className="mt-9 grid grid-cols-3 gap-4">
+              <Stat title="Max Supply" value="21M" icon={<Box />} />
+              <Stat title="Epochs" value="5" icon={<Clock3 />} />
+              <Stat title="Network" value="Base" icon={<Globe2 />} />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, x: 40 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.9 }}
-            className="relative hidden min-h-[720px] items-center justify-center lg:flex"
-          >
-            <div className="absolute h-[720px] w-[820px] rounded-full bg-lime-400/10 blur-[100px]" />
+          <div className="relative hidden h-[700px] lg:block">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(132,255,0,0.2),transparent_56%)]" />
 
-            <motion.div
-              animate={{ y: [0, -18, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative h-[620px] w-[760px]"
-            >
+            <div className="absolute left-[8%] top-[4%] h-[650px] w-[880px]">
               <Image
-                src="/hero-core.png"
-                alt="NonceForge Hologram Core"
+                src="/hero-hologram.png"
+                alt="NonceForge Hologram"
                 fill
                 priority
-                className="object-cover opacity-90 mix-blend-screen [mask-image:radial-gradient(circle_at_center,black_36%,transparent_72%)]"
+                className="object-contain drop-shadow-[0_0_80px_rgba(132,255,0,0.55)]"
               />
+            </div>
 
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.95)_78%)]" />
-            </motion.div>
-
-            <div className="absolute left-8 top-52 rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">
+            <div className="absolute left-[7%] top-[210px] rounded-2xl border border-white/15 bg-black/60 p-5 backdrop-blur-xl">
               <p className="text-sm text-zinc-400">Current Epoch</p>
-              <p className="mt-2 text-2xl font-black text-lime-400">Genesis</p>
+              <p className="mt-2 text-2xl font-black text-lime-400">
+                Genesis
+              </p>
             </div>
 
-            <div className="absolute bottom-36 right-8 rounded-2xl border border-white/15 bg-black/55 p-5 backdrop-blur-xl">
+            <div className="absolute right-[2%] top-[430px] rounded-2xl border border-white/15 bg-black/60 p-5 backdrop-blur-xl">
               <p className="text-sm text-zinc-400">Epoch 1 Reward</p>
-              <p className="mt-2 text-2xl font-black text-lime-400">100 NFG</p>
-              <p className="mt-1 text-sm text-zinc-500">per valid nonce</p>
+              <p className="mt-2 text-3xl font-black text-lime-400">
+                100 NFG
+              </p>
+              <p className="mt-1 text-sm text-zinc-400">per valid nonce</p>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="relative mx-auto mb-10 mt-8 grid max-w-7xl gap-4 rounded-2xl border border-white/10 bg-black/50 p-6 backdrop-blur md:grid-cols-4">
-          {[
-            ["Epoch-Based Rewards", "Earn based on network epochs and your contribution."],
-            ["Nonce Competition", "Compete for higher rewards with better nonces."],
-            ["Liquidity Backed", "Sustainable rewards backed by protocol liquidity."],
-            ["Secure & Transparent", "Built on Base. Verifiable and community-first."],
-          ].map(([title, desc]) => (
-            <div key={title} className="p-4">
-              <p className="font-bold text-white">{title}</p>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">{desc}</p>
-            </div>
-          ))}
+        <div className="relative mx-auto mt-8 grid max-w-[1440px] overflow-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl md:grid-cols-4">
+          <Feature
+            icon={<ShieldCheck />}
+            title="Epoch-Based Rewards"
+            desc="Earn based on network epochs and your contribution."
+          />
+          <Feature
+            icon={<Trophy />}
+            title="Nonce Competition"
+            desc="Compete for higher rewards with better nonces."
+          />
+          <Feature
+            icon={<Droplets />}
+            title="Liquidity Backed"
+            desc="Sustainable rewards backed by protocol liquidity."
+          />
+          <Feature
+            icon={<ShieldCheck />}
+            title="Secure & Transparent"
+            desc="Built on Base. Transparent, verifiable, and community-first."
+          />
         </div>
       </section>
     </main>
+  );
+}
+
+function Stat({
+  title,
+  value,
+  icon,
+}: {
+  title: string;
+  value: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <div className="relative min-h-[125px] rounded-2xl border border-white/10 bg-black/55 p-5 backdrop-blur-xl">
+      <p className="text-sm text-zinc-400">{title}</p>
+      <p className="mt-3 text-3xl font-black">{value}</p>
+      <div className="mt-4 h-[2px] w-14 bg-lime-400" />
+      <div className="absolute bottom-5 right-5 text-lime-400 drop-shadow-[0_0_16px_rgba(132,255,0,0.8)]">
+        {icon}
+      </div>
+    </div>
+  );
+}
+
+function Feature({
+  icon,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="flex gap-5 border-white/10 p-7 md:border-r">
+      <div className="text-lime-400 drop-shadow-[0_0_16px_rgba(132,255,0,0.8)]">
+        {icon}
+      </div>
+      <div>
+        <p className="font-bold text-white">{title}</p>
+        <p className="mt-2 text-sm leading-6 text-zinc-400">{desc}</p>
+      </div>
+    </div>
   );
 }
