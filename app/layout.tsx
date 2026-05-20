@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { WalletProvider } from "@/lib/wallet";
 
 export const metadata: Metadata = {
   title: "NonceForge",
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <WalletProvider>{children}</WalletProvider>
+      </body>
     </html>
   );
 }
