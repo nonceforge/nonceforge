@@ -5,7 +5,7 @@ export default function WalletConnectButton() {
     <button
       type="button"
       onClick={() => alert("Berhasil diklik")}
-      className="rounded-full border border-lime-400/30 bg-black px-4 py-2 text-sm font-bold text-lime-400"
+      className="relative z-[10001] rounded-full border border-lime-400/30 bg-lime-400/10 px-4 py-2 text-sm font-bold text-lime-400"
     >
       Connect
     </button>
