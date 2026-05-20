@@ -65,41 +65,44 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* RIGHT HOLOGRAM */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7 }}
             className="relative flex items-center justify-center"
           >
-            <div className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-lime-400/20 blur-[120px]" />
+            <div className="pointer-events-none absolute h-[420px] w-[420px] rounded-full bg-lime-400/20 blur-[120px] md:h-[520px] md:w-[520px]" />
 
-            <motion.img
-              src="/hero-core.png"
-              alt="NonceForge Hologram Core"
-              animate={{
-                y: [0, -14, 0],
-                scale: [1, 1.03, 1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative z-10 h-[340px] w-[340px] object-contain drop-shadow-[0_0_70px_rgba(132,204,22,0.7)] md:h-[520px] md:w-[520px]"
-            />
+            <div className="relative flex items-center justify-center">
+              <motion.img
+                src="/hero-core.png"
+                alt="NonceForge Core"
+                animate={{
+                  y: [0, -10, 0],
+                  scale: [1, 1.03, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative z-10 h-[320px] w-[320px] object-contain drop-shadow-[0_0_80px_rgba(132,204,22,0.75)] md:h-[460px] md:w-[460px]"
+              />
 
-            <div className="absolute left-0 top-16 z-20 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur">
-              <p className="text-xs text-zinc-500">Current Epoch</p>
-              <h4 className="mt-2 text-xl font-bold text-lime-400">
-                Genesis
-              </h4>
-            </div>
+              <div className="absolute left-[-10px] top-[70px] z-20 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur md:left-[-30px]">
+                <p className="text-xs text-zinc-500">Current Epoch</p>
+                <h4 className="mt-2 text-xl font-bold text-lime-400">
+                  Genesis
+                </h4>
+              </div>
 
-            <div className="absolute bottom-16 right-0 z-20 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur">
-              <p className="text-xs text-zinc-500">Mining Fee</p>
-              <h4 className="mt-2 text-xl font-bold text-lime-400">
-                0.00005 ETH
-              </h4>
+              <div className="absolute bottom-[70px] right-[-10px] z-20 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur md:right-[-30px]">
+                <p className="text-xs text-zinc-500">Mining Fee</p>
+                <h4 className="mt-2 text-xl font-bold text-lime-400">
+                  0.00005 ETH
+                </h4>
+              </div>
             </div>
           </motion.div>
         </div>
