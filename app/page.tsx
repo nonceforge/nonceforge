@@ -1,28 +1,199 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LaunchButton from "@/components/LaunchButton";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+
+      {/* BACKGROUND GLOW */}
+      <div className="pointer-events-none absolute left-1/2 top-[-180px] h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-lime-400/20 blur-[140px]" />
+
       <Navbar />
 
-      <section className="flex min-h-[85vh] items-center justify-center px-6">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-green-400">
-            Proof of Work Mining
-          </p>
+      {/* HERO */}
+      <section className="relative flex min-h-screen items-center justify-center px-6">
 
-          <h1 className="mb-6 text-5xl font-bold md:text-7xl">
-            NonceForge
-          </h1>
+        <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-2">
 
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-400">
-            Mine blocks, compete on the leaderboard, and earn rewards through
-            a wallet-powered mining dashboard.
-          </p>
+          {/* LEFT */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.4em] text-lime-400">
+              Proof Of Work Protocol
+            </p>
 
-          <LaunchButton />
+            <h1 className="mb-8 text-5xl font-black leading-tight md:text-7xl">
+              Mine. <br />
+              Compete. <br />
+              Earn.
+            </h1>
+
+            <p className="max-w-xl text-lg leading-8 text-zinc-400">
+              NonceForge is a browser mining protocol on Base
+              featuring epoch-based rewards, nonce competition,
+              and liquidity-backed mining economics.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-5">
+              <LaunchButton />
+
+              <button
+                className="
+                  rounded-2xl
+                  border
+                  border-zinc-800
+                  bg-zinc-900/60
+                  px-8
+                  py-5
+                  font-semibold
+                  text-zinc-300
+                  transition-all
+                  hover:border-lime-400/40
+                  hover:text-white
+                "
+              >
+                View Docs
+              </button>
+            </div>
+
+            {/* STATS */}
+            <div className="mt-14 grid grid-cols-3 gap-6">
+
+              <div className="rounded-2xl border border-zinc-900 bg-zinc-950/50 p-5">
+                <p className="text-sm text-zinc-500">
+                  Max Supply
+                </p>
+
+                <h3 className="mt-2 text-2xl font-bold">
+                  21M
+                </h3>
+              </div>
+
+              <div className="rounded-2xl border border-zinc-900 bg-zinc-950/50 p-5">
+                <p className="text-sm text-zinc-500">
+                  Epochs
+                </p>
+
+                <h3 className="mt-2 text-2xl font-bold">
+                  5
+                </h3>
+              </div>
+
+              <div className="rounded-2xl border border-zinc-900 bg-zinc-950/50 p-5">
+                <p className="text-sm text-zinc-500">
+                  Network
+                </p>
+
+                <h3 className="mt-2 text-2xl font-bold">
+                  Base
+                </h3>
+              </div>
+
+            </div>
+          </motion.div>
+
+          {/* RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="relative flex items-center justify-center"
+          >
+
+            {/* OUTER GLOW */}
+            <div className="absolute h-[420px] w-[420px] rounded-full bg-lime-400/20 blur-[100px]" />
+
+            {/* CENTER PANEL */}
+            <div
+              className="
+                relative
+                flex
+                h-[420px]
+                w-[420px]
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-lime-400/30
+                bg-black/60
+                shadow-[0_0_80px_rgba(132,204,22,0.25)]
+                backdrop-blur-xl
+              "
+            >
+
+              {/* INNER RING */}
+              <div
+                className="
+                  absolute
+                  h-[320px]
+                  w-[320px]
+                  rounded-full
+                  border
+                  border-lime-400/20
+                "
+              />
+
+              {/* CORE */}
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="
+                  relative
+                  flex
+                  h-40
+                  w-40
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-lime-400/40
+                  bg-lime-400/10
+                  text-6xl
+                  font-black
+                  text-lime-400
+                  shadow-[0_0_60px_rgba(132,204,22,0.5)]
+                "
+              >
+                N
+              </motion.div>
+
+              {/* FLOATING CARDS */}
+              <div className="absolute left-0 top-10 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur">
+                <p className="text-xs text-zinc-500">
+                  Current Epoch
+                </p>
+
+                <h4 className="mt-2 text-xl font-bold text-lime-400">
+                  Genesis
+                </h4>
+              </div>
+
+              <div className="absolute bottom-10 right-0 rounded-2xl border border-zinc-800 bg-black/80 p-4 backdrop-blur">
+                <p className="text-xs text-zinc-500">
+                  Mining Fee
+                </p>
+
+                <h4 className="mt-2 text-xl font-bold text-lime-400">
+                  0.00005 ETH
+                </h4>
+              </div>
+
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
