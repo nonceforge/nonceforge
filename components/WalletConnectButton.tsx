@@ -1,14 +1,30 @@
 "use client";
 
+import { useAccount } from "wagmi";
+import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+
 export default function WalletConnectButton() {
+  const { address, isConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+
+  const shortAddress = address
+    ? `${address.slice(0, 6)}...${address.slice(-4)}`
+    : "Connect";
+
   return (
     <button
       type="button"
-      onClick={() => alert("Connect berhasil diklik")}
-      onTouchStart={() => alert("Connect berhasil disentuh")}
-      className="w-full max-w-xs rounded-full border border-lime-400/30 bg-lime-400/10 px-6 py-4 text-center text-base font-bold text-lime-400"
+      onClick={() => {
+        if (isConnected) {
+          openAccountModal?.();
+        } else {
+          openConnectModal?.();
+        }
+      }}
+      className="rounded-full border border-lime-400/30 bg-lime-400/10 px-5 py-2 text-sm font-bold text-lime-400"
     >
-      Connect
+      {isConnected ? shortAddress : "Connect"}
     </button>
   );
 }
