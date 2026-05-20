@@ -1,169 +1,260 @@
+"use client";
+
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
+
+const distribution = [
+  { name: "Mining Rewards", value: 60 },
+  { name: "Liquidity", value: 25 },
+  { name: "Ecosystem", value: 10 },
+  { name: "Team", value: 5 },
+];
+
+const COLORS = [
+  "#84cc16",
+  "#22c55e",
+  "#06b6d4",
+  "#e5e7eb",
+];
+
+const epochs = [
+  {
+    epoch: "Epoch 1",
+    reward: "100 NFG",
+    difficulty: "Easy",
+    allocation: "2,000,000",
+  },
+  {
+    epoch: "Epoch 2",
+    reward: "75 NFG",
+    difficulty: "Normal",
+    allocation: "3,000,000",
+  },
+  {
+    epoch: "Epoch 3",
+    reward: "50 NFG",
+    difficulty: "Hard",
+    allocation: "4,000,000",
+  },
+  {
+    epoch: "Epoch 4",
+    reward: "25 NFG",
+    difficulty: "Very Hard",
+    allocation: "6,000,000",
+  },
+  {
+    epoch: "Epoch 5",
+    reward: "10 NFG",
+    difficulty: "Extreme",
+    allocation: "6,000,000",
+  },
+];
+
 export default function Tokenomics() {
-  const allocation = [
-    {
-      label: "Mining Rewards",
-      percent: 60,
-      desc: "Distributed to miners through epoch-based rewards.",
-    },
-    {
-      label: "Liquidity",
-      percent: 25,
-      desc: "Reserved to support market depth and healthier trading.",
-    },
-    {
-      label: "Team / Dev",
-      percent: 10,
-      desc: "Locked for development, maintenance, and protocol growth.",
-    },
-    {
-      label: "Marketing",
-      percent: 5,
-      desc: "Used for community campaigns and ecosystem expansion.",
-    },
-  ];
-
-  const epochs = [
-    { epoch: 1, reward: 100, title: "Genesis Advantage" },
-    { epoch: 2, reward: 75, title: "Early Expansion" },
-    { epoch: 3, reward: 50, title: "Balanced Emission" },
-    { epoch: 4, reward: 25, title: "Supply Control" },
-    { epoch: 5, reward: 10, title: "Final Reduction" },
-  ];
-
   return (
-    <section className="w-full">
-      <div className="mb-10">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-[0.35em] text-green-400">
-          NonceForge Economy
-        </p>
+    <section className="px-6 py-20 text-white">
+      <div className="mx-auto max-w-7xl space-y-10">
 
-        <h2 className="text-3xl font-bold md:text-4xl">
-          Tokenomics Built for Early Miners
-        </h2>
+        {/* HEADER */}
+        <div className="rounded-3xl border border-lime-400/20 bg-black/60 p-8 shadow-[0_0_40px_rgba(132,204,22,0.08)]">
+          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-lime-400">
+            Tokenomics
+          </p>
 
-        <p className="mt-4 max-w-3xl text-gray-400">
-          NonceForge is designed to reward early participation with higher
-          mining emissions, while gradually reducing rewards across each epoch
-          to help control supply pressure and support long-term sustainability.
-        </p>
-      </div>
+          <div className="grid gap-10 lg:grid-cols-2">
 
-      <div className="grid gap-5 md:grid-cols-4">
-        {allocation.map((item) => (
-          <div
-            key={item.label}
-            className="rounded-3xl border border-white/10 bg-black/40 p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-green-400/50 hover:bg-green-400/5"
-          >
-            <p className="text-sm text-gray-400">{item.label}</p>
+            {/* LEFT */}
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <p className="text-sm text-zinc-500">
+                  Max Supply
+                </p>
 
-            <h3 className="mt-3 text-4xl font-bold text-green-400">
-              {item.percent}%
-            </h3>
+                <h2 className="mt-2 text-3xl font-bold">
+                  21,000,000
+                </h2>
 
-            <p className="mt-3 text-sm text-gray-500">{item.desc}</p>
+                <p className="mt-1 text-zinc-400">
+                  NFG
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-zinc-500">
+                  Total Epochs
+                </p>
+
+                <h2 className="mt-2 text-3xl font-bold">
+                  5
+                </h2>
+
+                <p className="mt-1 text-zinc-400">
+                  Progressive Emission
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-zinc-500">
+                  Launch Model
+                </p>
+
+                <h2 className="mt-2 text-3xl font-bold">
+                  Fair Launch
+                </h2>
+
+                <p className="mt-1 text-zinc-400">
+                  No Presale
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-zinc-500">
+                  Blockchain
+                </p>
+
+                <h2 className="mt-2 text-3xl font-bold">
+                  Base
+                </h2>
+
+                <p className="mt-1 text-zinc-400">
+                  L2 Network
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT */}
+            <div className="flex items-center justify-center gap-8">
+              <div className="h-[220px] w-[220px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={distribution}
+                      innerRadius={60}
+                      outerRadius={90}
+                      dataKey="value"
+                      stroke="none"
+                    >
+                      {distribution.map((entry, index) => (
+                        <Cell
+                          key={index}
+                          fill={COLORS[index]}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="space-y-3">
+                {distribution.map((item, index) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center gap-3"
+                  >
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: COLORS[index],
+                      }}
+                    />
+
+                    <p className="text-sm text-zinc-300">
+                      {item.name}
+                    </p>
+
+                    <span className="ml-auto text-sm font-semibold">
+                      {item.value}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-8 rounded-3xl border border-green-400/20 bg-green-400/5 p-6">
-        <h3 className="text-2xl font-bold text-green-400">
-          Early Miner Advantage
-        </h3>
+        {/* EMISSION MODEL */}
+        <div className="rounded-3xl border border-lime-400/20 bg-black/60 p-8">
+          <p className="mb-8 text-sm uppercase tracking-[0.3em] text-lime-400">
+            Epoch Emission Schedule
+          </p>
 
-        <p className="mt-3 max-w-3xl text-gray-300">
-          Epoch 1 miners receive the highest reward rate. As more blocks are
-          mined, rewards decrease automatically, creating a stronger incentive
-          for early participation before emissions become more limited.
-        </p>
-      </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {epochs.map((item) => (
+              <div
+                key={item.epoch}
+                className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5"
+              >
+                <p className="text-sm text-lime-400">
+                  {item.epoch}
+                </p>
 
-      <div className="mt-8 rounded-3xl border border-white/10 bg-black/40 p-6">
-        <h3 className="mb-5 text-2xl font-bold">Epoch Reward Roadmap</h3>
+                <h3 className="mt-3 text-3xl font-black">
+                  {item.reward}
+                </h3>
 
-        <div className="grid gap-4 md:grid-cols-5">
-          {epochs.map((item) => (
-            <div
-              key={item.epoch}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:border-yellow-400/50 hover:bg-yellow-400/5"
-            >
-              <p className="text-sm text-gray-400">Epoch {item.epoch}</p>
+                <div className="mt-5 space-y-2 text-sm text-zinc-400">
+                  <p>
+                    Difficulty:{" "}
+                    <span className="text-white">
+                      {item.difficulty}
+                    </span>
+                  </p>
 
-              <h4 className="mt-2 text-2xl font-bold text-yellow-400">
-                {item.reward} NFG
-              </h4>
+                  <p>
+                    Allocation:{" "}
+                    <span className="text-white">
+                      {item.allocation}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-              <p className="mt-2 text-sm font-semibold text-white">
-                {item.title}
+        {/* FEE MODEL */}
+        <div className="rounded-3xl border border-lime-400/20 bg-black/60 p-8">
+          <p className="mb-6 text-sm uppercase tracking-[0.3em] text-lime-400">
+            Mining Fee Model
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
+              <h3 className="text-2xl font-bold text-lime-400">
+                70%
+              </h3>
+
+              <p className="mt-2 text-zinc-300">
+                Mining fees automatically injected into liquidity pool.
               </p>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
-        <div className="rounded-3xl border border-white/10 bg-black/40 p-6">
-          <h4 className="text-xl font-bold text-white">
-            Fair Launch Mining
-          </h4>
-          <p className="mt-3 text-sm text-gray-400">
-            Rewards are earned through mining activity, not instant free
-            allocation.
-          </p>
-        </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
+              <h3 className="text-2xl font-bold text-cyan-400">
+                20%
+              </h3>
 
-        <div className="rounded-3xl border border-white/10 bg-black/40 p-6">
-          <h4 className="text-xl font-bold text-white">
-            Decreasing Emission
-          </h4>
-          <p className="mt-3 text-sm text-gray-400">
-            Each epoch reduces rewards to help manage token circulation over
-            time.
-          </p>
+              <p className="mt-2 text-zinc-300">
+                Ecosystem treasury for future protocol expansion.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-6">
+              <h3 className="text-2xl font-bold text-red-400">
+                10%
+              </h3>
+
+              <p className="mt-2 text-zinc-300">
+                Permanent token burn reducing circulating supply.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-black/40 p-6">
-          <h4 className="text-xl font-bold text-white">
-            Liquidity Support
-          </h4>
-          <p className="mt-3 text-sm text-gray-400">
-            A dedicated liquidity allocation helps support smoother trading
-            once the market opens.
-          </p>
-        </div>
-        <div className="mt-8 rounded-3xl border border-green-400/20 bg-green-400/5 p-6">
-  <h3 className="text-2xl font-bold text-green-400">
-    Mining Fee → Liquidity Support
-  </h3>
-
-  <p className="mt-3 max-w-3xl text-gray-300">
-    Each successful mining submission includes a small mining fee. This fee is
-    designed to support protocol liquidity, helping create healthier market
-    depth and a more sustainable trading environment for NFG.
-  </p>
-
-  <div className="mt-5 grid gap-4 md:grid-cols-3">
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 1</p>
-      <h4 className="mt-2 text-lg font-bold text-white">
-        Miner Finds Nonce
-      </h4>
-    </div>
-
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 2</p>
-      <h4 className="mt-2 text-lg font-bold text-white">
-        Mining Fee Collected
-      </h4>
-    </div>
-
-    <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-      <p className="text-sm text-gray-400">Step 3</p>
-      <h4 className="mt-2 text-lg font-bold text-white">
-        Fee Supports Liquidity
-      </h4>
-    </div>
-  </div>
-</div>
       </div>
     </section>
   );
