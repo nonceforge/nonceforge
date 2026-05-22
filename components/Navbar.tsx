@@ -16,7 +16,8 @@ export default function Navbar() {
 
   return (
     <header className="relative z-50 border-b border-white/10 bg-black/50 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-5 md:flex-row">
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <img src="/icon.png" alt="NonceForge" className="h-8 w-8" />
 
@@ -25,7 +26,8 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-3 text-sm md:flex">
+        {/* Navigation */}
+        <nav className="flex w-full flex-wrap items-center justify-center gap-2 text-xs md:w-auto md:text-sm">
           {navItems.map((item) => {
             const active = pathname === item.href;
 
@@ -45,6 +47,7 @@ export default function Navbar() {
           })}
         </nav>
 
+        {/* Wallet */}
         <ConnectButton.Custom>
           {({
             account,
