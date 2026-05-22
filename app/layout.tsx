@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "Fair Launch Browser Mining Protocol",
   icons: {
     icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 

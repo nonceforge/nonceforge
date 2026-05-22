@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Leaderboard from "@/components/Leaderboard";
-import MiningTabs from "@/components/MiningTabs";
 
 export default function LeaderboardPage() {
   return (
@@ -9,7 +8,6 @@ export default function LeaderboardPage() {
       <Navbar />
 
       <section className="mx-auto max-w-7xl px-6 py-28">
-        <MiningTabs />
         <Leaderboard />
       </section>
 
