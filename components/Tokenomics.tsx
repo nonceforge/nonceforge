@@ -20,49 +20,23 @@ const distribution = [
 const COLORS = ["#84cc16", "#22c55e", "#06b6d4", "#e5e7eb"];
 
 const epochs = [
-  {
-    epoch: "Epoch 1",
-    reward: "100 NFG",
-    allocation: "2,000,000",
-    maxMint: "10",
-  },
-  {
-    epoch: "Epoch 2",
-    reward: "75 NFG",
-    allocation: "3,000,000",
-    maxMint: "25",
-  },
-  {
-    epoch: "Epoch 3",
-    reward: "50 NFG",
-    allocation: "4,000,000",
-    maxMint: "50",
-  },
-  {
-    epoch: "Epoch 4",
-    reward: "25 NFG",
-    allocation: "6,000,000",
-    maxMint: "100",
-  },
-  {
-    epoch: "Epoch 5",
-    reward: "10 NFG",
-    allocation: "6,000,000",
-    maxMint: "200",
-  },
+  { epoch: "Epoch 1", reward: "100 NFG", allocation: "2,000,000", maxMint: "10" },
+  { epoch: "Epoch 2", reward: "75 NFG", allocation: "3,000,000", maxMint: "25" },
+  { epoch: "Epoch 3", reward: "50 NFG", allocation: "4,000,000", maxMint: "50" },
+  { epoch: "Epoch 4", reward: "25 NFG", allocation: "6,000,000", maxMint: "100" },
+  { epoch: "Epoch 5", reward: "10 NFG", allocation: "6,000,000", maxMint: "200" },
 ];
 
 export default function Tokenomics() {
   return (
     <section className="relative overflow-hidden px-6 py-20 text-white">
-      {/* Background Glow */}
       <div className="pointer-events-none absolute left-1/2 top-20 h-80 w-80 -translate-x-1/2 rounded-full bg-lime-400/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl space-y-8">
-        {/* Hero */}
         <div className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
           <div className="mb-10">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lime-400/30 bg-lime-400/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300">
+              <Coins size={16} />
               TOKENOMICS
             </div>
 
@@ -72,12 +46,10 @@ export default function Tokenomics() {
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
               NonceForge uses a fair-launch emission model with mining rewards,
-              liquidity support, ecosystem reserve, and a limited team
-              allocation.
+              liquidity support, ecosystem reserve, and a limited team allocation.
             </p>
           </div>
 
-          {/* Stats */}
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="grid grid-cols-2 gap-4 md:flex md:flex-wrap">
               {[
@@ -98,9 +70,7 @@ export default function Tokenomics() {
                     {label}
                   </p>
 
-                  <p className="mt-2 text-lg font-black text-white">
-                    {value}
-                  </p>
+                  <p className="mt-2 text-lg font-black text-white">{value}</p>
                 </div>
               ))}
             </div>
@@ -114,7 +84,6 @@ export default function Tokenomics() {
             </div>
           </div>
 
-          {/* Chart */}
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="rounded-3xl border border-white/10 bg-black/40 p-6">
               <div className="grid items-center gap-6 md:grid-cols-[260px_1fr]">
@@ -130,10 +99,7 @@ export default function Tokenomics() {
                         stroke="none"
                       >
                         {distribution.map((entry, index) => (
-                          <Cell
-                            key={entry.name}
-                            fill={COLORS[index]}
-                          />
+                          <Cell key={entry.name} fill={COLORS[index]} />
                         ))}
                       </Pie>
                     </PieChart>
@@ -157,14 +123,10 @@ export default function Tokenomics() {
                       <div className="flex items-center gap-3">
                         <div
                           className="h-3 w-3 rounded-full"
-                          style={{
-                            backgroundColor: COLORS[index],
-                          }}
+                          style={{ backgroundColor: COLORS[index] }}
                         />
 
-                        <p className="text-sm text-zinc-300">
-                          {item.name}
-                        </p>
+                        <p className="text-sm text-zinc-300">{item.name}</p>
                       </div>
 
                       <span className="text-sm font-bold text-white">
@@ -176,36 +138,12 @@ export default function Tokenomics() {
               </div>
             </div>
 
-            {/* Info */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {[
-                [
-                  "Mining Rewards",
-                  "60%",
-                  "Distributed to miners through nonce discovery.",
-                  Coins,
-                ],
-
-                [
-                  "Liquidity",
-                  "25%",
-                  "Mining fees routed into liquidity pools.",
-                  Droplets,
-                ],
-
-                [
-                  "Ecosystem",
-                  "10%",
-                  "Treasury for ecosystem expansion and development.",
-                  Rocket,
-                ],
-
-                [
-                  "Team",
-                  "5%",
-                  "Limited allocation for long-term contributors.",
-                  Shield,
-                ],
+                ["Mining Rewards", "60%", "Distributed to miners through nonce discovery.", Coins],
+                ["Liquidity", "25%", "Mining fees routed into liquidity pools.", Droplets],
+                ["Ecosystem", "10%", "Treasury for ecosystem expansion and development.", Rocket],
+                ["Team", "5%", "Limited allocation for long-term contributors.", Shield],
               ].map(([title, value, desc, Icon]: any) => (
                 <div
                   key={title}
@@ -230,7 +168,6 @@ export default function Tokenomics() {
           </div>
         </div>
 
-        {/* Epochs */}
         <div className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
@@ -256,19 +193,13 @@ export default function Tokenomics() {
                 key={item.epoch}
                 className="group rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-lime-400/30 hover:bg-lime-400/10"
               >
-                <p className="text-sm font-bold text-lime-300">
-                  {item.epoch}
-                </p>
+                <p className="text-sm font-bold text-lime-300">{item.epoch}</p>
 
-                <h4 className="mt-4 text-3xl font-black">
-                  {item.reward}
-                </h4>
+                <h4 className="mt-4 text-3xl font-black">{item.reward}</h4>
 
                 <div className="mt-5 space-y-3 text-sm">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-zinc-500">
-                      Allocation
-                    </span>
+                    <span className="text-zinc-500">Allocation</span>
 
                     <span className="font-semibold text-white">
                       {item.allocation}
@@ -276,9 +207,7 @@ export default function Tokenomics() {
                   </div>
 
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-zinc-500">
-                      Max Mint
-                    </span>
+                    <span className="text-zinc-500">Max Mint</span>
 
                     <span className="font-semibold text-white">
                       {item.maxMint}
