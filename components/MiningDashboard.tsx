@@ -1,15 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MiningActivity from "@/components/MiningActivity";
 import {
   Activity,
   BarChart3,
   Cpu,
-  Gauge,
+  FileCode2,
   Gem,
   Pickaxe,
-  Radio,
   Rocket,
   Server,
   ShieldCheck,
@@ -19,41 +18,163 @@ import {
 
 export default function MiningDashboard() {
   const [selectedMiner, setSelectedMiner] = useState("web");
+  const [isMining, setIsMining] = useState(false);
 
-  const totalMined = 0;
-  const hashrate = 0;
-  const nonceChecked = 0;
-  const validNonce = 0;
+  const [hashrate, setHashrate] = useState(0);
+  const [nonceChecked, setNonceChecked] = useState(0);
 
-  const formatNumber = (value: number) => value.toLocaleString("en-US");
+  const [contractStats, setContractStats] = useState({
+    totalMined: 0,
+    userValidNonce: 0,
+    contractStatus: "Pending",
+  });
 
   const epochs = [
-    { epoch: 1, maxMined: 1000, reward: 100 },
-    { epoch: 2, maxMined: 3000, reward: 75 },
-    { epoch: 3, maxMined: 6000, reward: 50 },
-    { epoch: 4, maxMined: 10000, reward: 25 },
-    { epoch: 5, maxMined: 15000, reward: 10 },
+    {
+      epoch: 1,
+      reward: 100,
+      fee: 0.00005,
+      allocation: 2_000_000,
+      maxMintPerUser: 10,
+      chance: 0.97,
+    },
+    {
+      epoch: 2,
+      reward: 75,
+      fee: 0.00007,
+      allocation: 3_000_000,
+      maxMintPerUser: 25,
+      chance: 0.95,
+    },
+    {
+      epoch: 3,
+      reward: 50,
+      fee: 0.0001,
+      allocation: 4_000_000,
+      maxMintPerUser: 50,
+      chance: 0.93,
+    },
+    {
+      epoch: 4,
+      reward: 25,
+      fee: 0.00015,
+      allocation: 6_000_000,
+      maxMintPerUser: 100,
+      chance: 0.9,
+    },
+    {
+      epoch: 5,
+      reward: 10,
+      fee: 0.0002,
+      allocation: 6_000_000,
+      maxMintPerUser: 200,
+      chance: 0.87,
+    },
   ];
 
-  const currentEpoch = useMemo(() => {
-    return epochs.find((item) => totalMined <= item.maxMined) ?? epochs[4];
-  }, [totalMined]);
+  const totalAllocation = epochs.reduce(
+    (sum, item) => sum + item.allocation,
+    0
+  );
 
-  const previousLimit =
-    currentEpoch.epoch === 1 ? 0 : epochs[currentEpoch.epoch - 2].maxMined;
+  const currentEpoch = useMemo(() => {
+    let accumulated = 0;
+
+    for (const item of epochs) {
+      accumulated += item.allocation;
+
+      if (contractStats.totalMined < accumulated) {
+        return {
+          ...item,
+          epochStart: accumulated - item.allocation,
+          epochEnd: accumulated,
+        };
+      }
+    }
+
+    const lastEpoch = epochs[epochs.length - 1];
+
+    return {
+      ...lastEpoch,
+      epochStart: totalAllocation - lastEpoch.allocation,
+      epochEnd: totalAllocation,
+    };
+  }, [contractStats.totalMined, totalAllocation]);
 
   const epochProgress =
-    ((totalMined - previousLimit) /
-      (currentEpoch.maxMined - previousLimit)) *
+    ((contractStats.totalMined - currentEpoch.epochStart) /
+      (currentEpoch.epochEnd - currentEpoch.epochStart)) *
     100;
+
+  const totalProgress = (contractStats.totalMined / totalAllocation) * 100;
+
+  const userMintProgress =
+    (contractStats.userValidNonce / currentEpoch.maxMintPerUser) * 100;
+
+  const formatNumber = (value: number) => {
+    return value.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const formatCompact = (value: number) => {
+    return Intl.NumberFormat("en-US", {
+      notation: "compact",
+      maximumFractionDigits: 1,
+    }).format(value);
+  };
+
+  useEffect(() => {
+    if (!isMining) {
+      setHashrate(0);
+      return;
+    }
+
+    if (contractStats.userValidNonce >= currentEpoch.maxMintPerUser) {
+      setIsMining(false);
+      return;
+    }
+
+    if (contractStats.totalMined >= totalAllocation) {
+      setIsMining(false);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const randomHashrate = Math.floor(1200 + Math.random() * 4200);
+      const randomNonce = Math.floor(300 + Math.random() * 1500);
+      const foundValid = Math.random() > currentEpoch.chance;
+
+      setHashrate(randomHashrate);
+      setNonceChecked((prev) => prev + randomNonce);
+
+      if (foundValid) {
+        setContractStats((prev) => ({
+          ...prev,
+          totalMined: prev.totalMined + currentEpoch.reward,
+          userValidNonce: prev.userValidNonce + 1,
+        }));
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [
+    isMining,
+    currentEpoch.chance,
+    currentEpoch.reward,
+    currentEpoch.maxMintPerUser,
+    contractStats.userValidNonce,
+    contractStats.totalMined,
+    totalAllocation,
+  ]);
 
   const minerCards = [
     {
       id: "web",
       label: "Browser Mining",
       title: "Web Miner",
-      desc: "Lightweight browser mining interface for early protocol onboarding.",
-      status: "GENESIS READY",
+      desc: "Genesis mining interface for public onboarding and early protocol participation.",
+      status: "GENESIS",
       icon: Pickaxe,
       accent: "text-lime-300",
       border: "border-lime-400/40",
@@ -61,10 +182,10 @@ export default function MiningDashboard() {
     },
     {
       id: "cpu",
-      label: "CPU Mining",
-      title: "Desktop / VPS",
-      desc: "Dedicated CPU mining client planned for future protocol upgrades.",
-      status: "PLANNED",
+      label: "CPU / VPS Mining",
+      title: "Desktop / VPS Miner",
+      desc: "Dedicated CPU miner planned after browser mining activation to expand participation without opening GPU dominance too early.",
+      status: "NEXT",
       icon: Cpu,
       accent: "text-yellow-300",
       border: "border-yellow-400/30",
@@ -74,8 +195,8 @@ export default function MiningDashboard() {
       id: "gpu",
       label: "GPU Mining",
       title: "CUDA / OpenCL",
-      desc: "High-performance GPU mining infrastructure for advanced miners.",
-      status: "PLANNED",
+      desc: "High-performance GPU mining planned later after network stability, stronger liquidity, and wider miner participation.",
+      status: "LATER",
       icon: Server,
       accent: "text-cyan-300",
       border: "border-cyan-400/30",
@@ -87,42 +208,35 @@ export default function MiningDashboard() {
     {
       label: "Current Epoch",
       value: `Epoch ${currentEpoch.epoch}`,
-      sub: `Reward ${currentEpoch.reward} NFG`,
+      sub: `${currentEpoch.reward} NFG per valid nonce`,
       icon: Rocket,
       color: "text-lime-300",
     },
     {
-      label: "Hashrate",
-      value: `${formatNumber(hashrate)} H/s`,
-      sub: "Browser miner idle",
-      icon: Gauge,
-      color: "text-white",
-    },
-    {
-      label: "Mining Status",
-      value: "Pending",
-      sub: "Waiting for contract launch",
-      icon: Radio,
-      color: "text-yellow-300",
-    },
-    {
-      label: "Total Mined",
-      value: formatNumber(totalMined),
-      sub: "Total mined rewards",
+      label: "Claim Fee",
+      value: `${currentEpoch.fee} ETH`,
+      sub: "Fee handled by smart contract",
       icon: Gem,
+      color: "text-lime-300",
+    },
+    {
+      label: "Hashrate",
+      value: `${formatCompact(hashrate)} H/s`,
+      sub: isMining ? "Browser miner running" : "Browser miner idle",
+      icon: Zap,
       color: "text-white",
     },
     {
-      label: "Nonce Checked",
-      value: formatNumber(nonceChecked),
-      sub: "Total nonce attempts",
+      label: "Network Mined",
+      value: `${formatCompact(contractStats.totalMined)} NFG`,
+      sub: "Global mined supply",
       icon: BarChart3,
       color: "text-white",
     },
     {
-      label: "Valid Nonce",
-      value: formatNumber(validNonce),
-      sub: "Accepted nonce results",
+      label: "Your Mint",
+      value: `${contractStats.userValidNonce}/${currentEpoch.maxMintPerUser}`,
+      sub: `Max mint in Epoch ${currentEpoch.epoch}`,
       icon: ShieldCheck,
       color: "text-lime-300",
     },
@@ -145,21 +259,38 @@ export default function MiningDashboard() {
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg">
-              Browser mining interface is preparing for launch. Mining will be
-              enabled after smart contract deployment, nonce validation, and
-              reward verification are live.
+              Mine valid nonces directly from your browser and earn NFG rewards.
+              Epoch changes automatically based on total network mined supply.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
               <button
-                disabled
-                className="cursor-not-allowed rounded-full bg-zinc-800 px-6 py-3 text-sm font-bold text-zinc-500"
+                onClick={() => setIsMining(!isMining)}
+                disabled={
+                  contractStats.userValidNonce >= currentEpoch.maxMintPerUser ||
+                  contractStats.totalMined >= totalAllocation
+                }
+                className={`rounded-full px-6 py-3 text-sm font-bold transition ${
+                  contractStats.userValidNonce >= currentEpoch.maxMintPerUser ||
+                  contractStats.totalMined >= totalAllocation
+                    ? "cursor-not-allowed bg-zinc-800 text-zinc-500"
+                    : isMining
+                    ? "border border-red-400/30 bg-red-500/15 text-red-300 hover:bg-red-500/25"
+                    : "bg-lime-400 text-black hover:bg-lime-300"
+                }`}
               >
-                Mining Launch Soon
+                {contractStats.totalMined >= totalAllocation
+                  ? "All Epochs Completed"
+                  : contractStats.userValidNonce >= currentEpoch.maxMintPerUser
+                  ? "Epoch Mint Limit Reached"
+                  : isMining
+                  ? "Stop Mining"
+                  : "Start Mining"}
               </button>
 
-              <div className="rounded-full border border-lime-400/20 bg-lime-400/10 px-6 py-3 text-sm font-semibold text-lime-300">
-                Smart Contract Pending
+              <div className="inline-flex items-center gap-2 rounded-full border border-yellow-400/25 bg-yellow-400/10 px-6 py-3 text-sm font-semibold text-yellow-300">
+                <FileCode2 size={16} />
+                Smart Contract: {contractStats.contractStatus}
               </div>
             </div>
           </div>
@@ -171,28 +302,48 @@ export default function MiningDashboard() {
               <div className="mb-6 flex items-center justify-between">
                 <div>
                   <p className="text-sm text-zinc-500">Mining Core</p>
+
                   <h3 className="text-2xl font-bold text-lime-300">
-                    Standby Mode
+                    {isMining ? "Active Mining" : "Standby Mode"}
                   </h3>
                 </div>
 
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl border text-lime-300 ${
+                    isMining
+                      ? "border-lime-400/40 bg-lime-400/20 shadow-[0_0_35px_rgba(163,230,53,0.25)]"
+                      : "border-lime-400/20 bg-lime-400/10"
+                  }`}
+                >
                   <Zap size={28} />
                 </div>
               </div>
 
-              <div className="relative mx-auto flex h-52 w-52 items-center justify-center rounded-full border border-lime-400/20 bg-black">
+              <div
+                className={`relative mx-auto flex h-52 w-52 items-center justify-center rounded-full border bg-black transition ${
+                  isMining
+                    ? "border-lime-400/50 shadow-[0_0_55px_rgba(163,230,53,0.2)]"
+                    : "border-lime-400/20"
+                }`}
+              >
                 <div className="absolute h-40 w-40 rounded-full border border-lime-400/20" />
                 <div className="absolute h-28 w-28 rounded-full border border-lime-400/30" />
-                <div className="absolute h-16 w-16 rounded-full bg-lime-400/20 blur-xl" />
+
+                <div
+                  className={`absolute h-16 w-16 rounded-full bg-lime-400/20 blur-xl ${
+                    isMining ? "animate-pulse" : ""
+                  }`}
+                />
 
                 <Pickaxe className="relative text-lime-300" size={48} />
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                  <p className="text-zinc-500">Difficulty</p>
-                  <p className="mt-1 font-bold text-white">Dynamic</p>
+                  <p className="text-zinc-500">Nonce Checked</p>
+                  <p className="mt-1 font-bold text-white">
+                    {formatCompact(nonceChecked)}
+                  </p>
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
@@ -275,9 +426,14 @@ export default function MiningDashboard() {
         <div className="mt-8 rounded-3xl border border-white/10 bg-zinc-950/60 p-6">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <p className="text-sm text-zinc-400">Epoch Progress</p>
+              <p className="text-sm text-zinc-400">Epoch Allocation Progress</p>
+
               <h3 className="mt-1 text-xl font-bold">
-                Epoch {currentEpoch.epoch} Reward Window
+                Epoch {currentEpoch.epoch}:{" "}
+                {formatNumber(
+                  contractStats.totalMined - currentEpoch.epochStart
+                )}{" "}
+                / {formatNumber(currentEpoch.allocation)} NFG
               </h3>
             </div>
 
@@ -294,10 +450,57 @@ export default function MiningDashboard() {
               }}
             />
           </div>
+        </div>
 
-          <div className="mt-4 flex flex-wrap justify-between gap-3 text-sm text-zinc-500">
-            <p>Start: {formatNumber(previousLimit)} mined</p>
-            <p>End: {formatNumber(currentEpoch.maxMined)} mined</p>
+        <div className="mt-8 rounded-3xl border border-white/10 bg-zinc-950/60 p-6">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <p className="text-sm text-zinc-400">Your Mint Progress</p>
+
+              <h3 className="mt-1 text-xl font-bold">
+                {contractStats.userValidNonce}/{currentEpoch.maxMintPerUser}{" "}
+                Valid Nonce
+              </h3>
+            </div>
+
+            <p className="text-sm font-semibold text-lime-300">
+              {Math.min(userMintProgress, 100).toFixed(1)}%
+            </p>
+          </div>
+
+          <div className="h-4 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-lime-400 transition-all duration-700"
+              style={{
+                width: `${Math.min(userMintProgress, 100)}%`,
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-3xl border border-white/10 bg-zinc-950/60 p-6">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <p className="text-sm text-zinc-400">Total Network Progress</p>
+
+              <h3 className="mt-1 text-xl font-bold">
+                {formatNumber(contractStats.totalMined)} /{" "}
+                {formatNumber(totalAllocation)} NFG
+              </h3>
+            </div>
+
+            <p className="text-sm font-semibold text-lime-300">
+              {Math.min(totalProgress, 100).toFixed(1)}%
+            </p>
+          </div>
+
+          <div className="h-4 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-lime-400 transition-all duration-700"
+              style={{
+                width: `${Math.min(totalProgress, 100)}%`,
+              }}
+            />
           </div>
         </div>
 
@@ -312,9 +515,12 @@ export default function MiningDashboard() {
               {[
                 ["Landing Interface", "Ready"],
                 ["Mining UI", "Ready"],
+                ["Wallet Connect", "Ready"],
                 ["Smart Contract", "Pending"],
-                ["Nonce Validation", "Pending"],
-                ["Reward Claim", "Pending"],
+                ["Base Mainnet + Liquidity", "Pending"],
+                ["Browser Mining", "Pending"],
+                ["CPU / VPS Miner", "Planned"],
+                ["GPU / CUDA Miner", "Later"],
               ].map(([label, status]) => (
                 <div
                   key={label}
@@ -326,6 +532,8 @@ export default function MiningDashboard() {
                     className={
                       status === "Ready"
                         ? "font-semibold text-lime-300"
+                        : status === "Later"
+                        ? "font-semibold text-cyan-300"
                         : "font-semibold text-yellow-300"
                     }
                   >

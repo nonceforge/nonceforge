@@ -1,322 +1,341 @@
+import {
+  AlertTriangle,
+  Blocks,
+  Cpu,
+  FileText,
+  Gauge,
+  Globe2,
+  Layers,
+  Pickaxe,
+  Rocket,
+  ShieldCheck,
+  Wallet,
+  Zap,
+} from "lucide-react";
+
 export default function DocsContent() {
   const stats = [
-    ["Network", "Base Mainnet"],
-    ["Token Symbol", "NFG"],
-    ["Max Supply", "21,000,000 NFG"],
-    ["Mining Model", "Proof-of-Work"],
+    ["Network", "Base Mainnet", Globe2],
+    ["Token Symbol", "NFG", Blocks],
+    ["Max Supply", "21,000,000 NFG", ShieldCheck],
+    ["Mining Model", "Proof-of-Work", Pickaxe],
   ];
 
-  const steps = [
-    "Connect wallet",
-    "Access mining dashboard",
-    "Generate nonce",
-    "Submit valid proof",
-    "Claim reward when mining launches",
+  const miningSteps = [
+    ["Connect Wallet", "User connects a Base-compatible wallet."],
+    ["Start Miner", "Browser miner begins searching valid nonce."],
+    ["Find Nonce", "Nonce is checked against the active epoch target."],
+    ["Submit Proof", "Valid proof is submitted to the smart contract."],
+    ["Claim Reward", "Eligible reward is minted after verification."],
+  ];
+
+  const protocolCards = [
+    {
+      title: "Fair Launch",
+      text: "NFG is designed around mining participation instead of presale-based distribution.",
+      icon: Rocket,
+    },
+    {
+      title: "Fixed Supply",
+      text: "The protocol is structured around a maximum supply of 21,000,000 NFG.",
+      icon: ShieldCheck,
+    },
+    {
+      title: "Epoch Emission",
+      text: "Rewards decrease across epochs while allocation windows control emission flow.",
+      icon: Layers,
+    },
+  ];
+
+  const minerModes = [
+    {
+      title: "Browser Mining",
+      status: "PREVIEW",
+      text: "Accessible mining interface for early user onboarding.",
+      color: "text-lime-300",
+      border: "border-lime-400/20",
+      bg: "bg-lime-400/10",
+    },
+    {
+      title: "CPU Mining",
+      status: "PLANNED",
+      text: "Dedicated desktop and VPS miner planned for future expansion.",
+      color: "text-yellow-300",
+      border: "border-yellow-400/20",
+      bg: "bg-yellow-400/10",
+    },
+    {
+      title: "GPU Mining",
+      status: "PLANNED",
+      text: "High-performance CUDA/OpenCL mining planned for advanced miners.",
+      color: "text-cyan-300",
+      border: "border-cyan-400/20",
+      bg: "bg-cyan-400/10",
+    },
   ];
 
   return (
-    <div>
-      <div className="rounded-3xl border border-green-400/20 bg-gradient-to-br from-green-400/10 via-black to-black p-8">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-green-400">
-          NonceForge Documentation
-        </p>
+    <div className="relative overflow-hidden text-white">
+      <div className="pointer-events-none absolute left-1/2 top-20 h-80 w-80 -translate-x-1/2 rounded-full bg-lime-400/10 blur-3xl" />
 
-        <h1 className="max-w-4xl text-4xl font-black md:text-6xl">
-          Fair Launch Browser Mining Protocol
-        </h1>
-
-        <p className="mt-5 max-w-4xl text-lg text-gray-300">
-          NonceForge is a proof-of-work browser mining protocol on Base designed
-          for fair launch participation, fixed supply distribution, decreasing
-          emissions, and early miner incentives.
-        </p>
-
-        <div className="mt-6 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-5 py-2 text-sm font-semibold text-yellow-300">
-          Genesis Preview • Mining Not Yet Publicly Active
-        </div>
-      </div>
-
-      <div className="mt-8 grid gap-4 md:grid-cols-4">
-        {stats.map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-2xl border border-white/10 bg-black/40 p-5"
-          >
-            <p className="text-sm text-gray-500">{label}</p>
-
-            <h3 className="mt-2 text-xl font-bold text-green-400">
-              {value}
-            </h3>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10 rounded-3xl border border-green-400/20 bg-green-400/5 p-7">
-        <h2 className="text-2xl font-bold text-green-400">
-          Mining Fee & Liquidity
-        </h2>
-
-        <p className="mt-4 text-gray-300">
-          When a miner submits a valid nonce, a small protocol mining fee may
-          be required. The fee is designed to support liquidity infrastructure
-          instead of hidden insider allocation.
-        </p>
-
-        <p className="mt-4 text-gray-300">
-          The objective is to create a more sustainable mining economy where
-          mining activity contributes back to liquidity growth and healthier
-          market depth for NFG participants.
-        </p>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-            <p className="text-sm text-gray-400">Step 1</p>
-
-            <h3 className="mt-2 text-lg font-bold text-white">
-              Miner Finds Nonce
-            </h3>
+      <div className="relative space-y-8">
+        <section className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lime-400/25 bg-lime-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-lime-300">
+            <FileText size={14} />
+            NonceForge Documentation
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-            <p className="text-sm text-gray-400">Step 2</p>
+          <h1 className="max-w-5xl text-4xl font-black tracking-tight md:text-6xl">
+            Fair Launch Browser Mining Protocol
+          </h1>
 
-            <h3 className="mt-2 text-lg font-bold text-white">
-              Protocol Fee Processed
-            </h3>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-            <p className="text-sm text-gray-400">Step 3</p>
-
-            <h3 className="mt-2 text-lg font-bold text-white">
-              Liquidity Infrastructure Supported
-            </h3>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">
-          Protocol Overview
-        </h2>
-
-        <p className="mt-4 text-gray-400">
-          Unlike traditional token launches that depend on private allocation or
-          centralized distribution, NonceForge is designed around proof-based
-          participation where miners compete to discover valid nonces that
-          satisfy the active protocol difficulty target.
-        </p>
-
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-lg font-bold text-green-400">
-              Fair Distribution
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              Rewards are designed to be earned through mining activity rather
-              than hidden free allocation or unlimited minting.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-lg font-bold text-green-400">
-              Genesis Epoch
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              Early protocol participants are expected to benefit from Genesis
-              phase reward structures before future emission reductions.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-lg font-bold text-green-400">
-              Browser Mining First
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              NonceForge initially focuses on browser accessibility to simplify
-              onboarding and early ecosystem participation.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">
-          Genesis Browser Mining
-        </h2>
-
-        <p className="mt-4 text-gray-400">
-          NonceForge currently operates in Genesis Preview while mining
-          infrastructure, nonce validation, reward mechanics, and protocol
-          security continue to be finalized before public activation.
-        </p>
-
-        <div className="mt-6 rounded-2xl border border-green-400/20 bg-green-400/5 p-5">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-400">
-            Genesis Preview
+          <p className="mt-5 max-w-4xl text-base leading-8 text-zinc-400 md:text-lg">
+            NonceForge is a proof-of-work mining protocol on Base designed for
+            fair launch participation, fixed supply distribution, epoch-based
+            emissions, and transparent on-chain reward verification.
           </p>
 
-          <h3 className="mt-3 text-2xl font-bold text-white">
-            Browser Mining Preview
-          </h3>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <div className="inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-5 py-3 text-sm font-semibold text-yellow-300">
+              Genesis Preview
+            </div>
 
-          <p className="mt-3 text-sm text-gray-300">
-            Browser mining infrastructure is currently in preview mode while
-            desktop CPU and GPU mining environments continue to be developed for
-            future protocol expansion.
-          </p>
-        </div>
-      </div>
+            <div className="inline-flex rounded-full border border-lime-400/20 bg-lime-400/10 px-5 py-3 text-sm font-semibold text-lime-300">
+              Base Ready
+            </div>
 
-      <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">
-          How Mining Works
-        </h2>
+            <div className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-zinc-300">
+              Smart Contract Pending
+            </div>
+          </div>
+        </section>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-5">
-          {steps.map((step, index) => (
+        <section className="grid gap-4 md:grid-cols-4">
+          {stats.map(([label, value, Icon]: any) => (
             <div
-              key={step}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+              key={label}
+              className="rounded-3xl border border-white/10 bg-zinc-950/70 p-5"
             >
-              <p className="text-sm font-bold text-green-400">
-                Step {index + 1}
-              </p>
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+                <Icon size={21} />
+              </div>
 
-              <h3 className="mt-2 font-semibold text-white">
-                {step}
-              </h3>
+              <p className="text-sm text-zinc-500">{label}</p>
+
+              <h3 className="mt-2 text-xl font-black text-white">{value}</h3>
             </div>
           ))}
-        </div>
+        </section>
 
-        <div className="mt-6 rounded-2xl border border-green-400/20 bg-green-400/5 p-5">
-          <pre className="overflow-x-auto text-sm leading-7 text-green-300">
-{`nonce + wallet + epochSeed
-        ↓
-keccak256 hash
-        ↓
-hash must be below target
-        ↓
-valid nonce submitted
-        ↓
-reward eligibility verified`}
-          </pre>
-        </div>
-      </div>
+        <section className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300">
+            Protocol Overview
+          </p>
 
-      <div className="mt-10 rounded-3xl border border-white/10 bg-black/40 p-7">
-        <h2 className="text-2xl font-bold text-white">
-          Miner Modes
-        </h2>
-
-        <p className="mt-4 text-gray-400">
-          NonceForge currently focuses on browser-based mining infrastructure
-          during the Genesis Preview phase. Additional mining clients for
-          desktop CPU and GPU environments are planned for future protocol
-          expansion.
-        </p>
-
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          <div className="rounded-2xl border border-green-400/20 bg-green-400/5 p-5">
-            <p className="text-sm uppercase tracking-[0.25em] text-green-400">
-              Browser Mining
-            </p>
-
-            <h3 className="mt-3 text-xl font-bold">
-              Genesis Preview
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              Lightweight browser-based mining designed for accessible Genesis
-              onboarding and early protocol participation.
-            </p>
-
-            <div className="mt-5 inline-flex rounded-full border border-green-400/20 bg-green-400/10 px-4 py-2 text-xs font-semibold text-green-400">
-              PREVIEW
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-5 opacity-80">
-            <p className="text-sm uppercase tracking-[0.25em] text-yellow-400">
-              CPU Mining
-            </p>
-
-            <h3 className="mt-3 text-xl font-bold">
-              Desktop / VPS
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              Dedicated desktop and VPS mining clients are planned for future
-              protocol upgrades.
-            </p>
-
-            <div className="mt-5 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-4 py-2 text-xs font-semibold text-yellow-400">
-              PLANNED
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5 opacity-80">
-            <p className="text-sm uppercase tracking-[0.25em] text-cyan-400">
-              GPU Mining
-            </p>
-
-            <h3 className="mt-3 text-xl font-bold">
-              CUDA / OpenCL
-            </h3>
-
-            <p className="mt-3 text-sm text-gray-400">
-              High-performance GPU mining infrastructure is planned for advanced
-              and competitive miners.
-            </p>
-
-            <div className="mt-5 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-semibold text-cyan-400">
-              PLANNED
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
-        <div className="rounded-3xl border border-white/10 bg-black/40 p-7">
-          <h2 className="text-2xl font-bold text-white">
-            Supply Protection
+          <h2 className="text-3xl font-black tracking-tight">
+            How NonceForge Works
           </h2>
 
-          <p className="mt-4 text-gray-400">
-            NonceForge is designed around a fixed maximum supply. Smart contract
-            architecture is intended to prevent minting beyond the
-            21,000,000 NFG cap.
+          <p className="mt-4 max-w-4xl text-sm leading-7 text-zinc-400 md:text-base">
+            Miners compete to discover valid nonces. A valid nonce must satisfy
+            the active smart contract validation rule for the current epoch.
+            Once verified, the miner becomes eligible to claim NFG rewards.
           </p>
-        </div>
 
-        <div className="rounded-3xl border border-white/10 bg-black/40 p-7">
-          <h2 className="text-2xl font-bold text-white">
-            Difficulty Control
+          <div className="mt-7 grid gap-5 md:grid-cols-3">
+            {protocolCards.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+                >
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+                    <Icon size={24} />
+                  </div>
+
+                  <h3 className="text-xl font-black text-white">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-6 text-zinc-400">
+                    {item.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300">
+            Mining Flow
+          </p>
+
+          <h2 className="text-3xl font-black tracking-tight">
+            From Wallet to Reward
           </h2>
 
-          <p className="mt-4 text-gray-400">
-            Mining difficulty determines how challenging it is to discover a
-            valid nonce. Higher difficulty requires more computational work and
-            helps regulate emission speed.
+          <div className="mt-7 grid gap-4 md:grid-cols-5">
+            {miningSteps.map(([title, text], index) => (
+              <div
+                key={title}
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-5"
+              >
+                <p className="text-sm font-bold text-lime-300">
+                  Step {index + 1}
+                </p>
+
+                <h3 className="mt-3 text-lg font-black text-white">{title}</h3>
+
+                <p className="mt-3 text-sm leading-6 text-zinc-400">{text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-7 rounded-3xl border border-lime-400/20 bg-lime-400/5 p-6">
+            <pre className="overflow-x-auto text-sm leading-7 text-lime-300">
+{`wallet + nonce + epochSeed
+        ↓
+hash validation
+        ↓
+hash must satisfy target
+        ↓
+valid proof submitted
+        ↓
+reward eligibility confirmed`}
+            </pre>
+          </div>
+        </section>
+
+        <section className="grid gap-5 lg:grid-cols-[1fr_1fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+              <Gauge size={24} />
+            </div>
+
+            <h2 className="text-2xl font-black text-white">
+              Epoch-Based Emission
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-zinc-400">
+              NonceForge uses multiple emission epochs. Each epoch has its own
+              reward amount, allocation window, and mint limit. Epoch transition
+              is designed to follow total mined supply from the smart contract,
+              not local frontend state.
+            </p>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+              <Wallet size={24} />
+            </div>
+
+            <h2 className="text-2xl font-black text-white">
+              Fee & Liquidity Flow
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-zinc-400">
+              Mining claim fees are intended to be handled by the smart contract.
+              The fee mechanism is designed to support protocol liquidity and
+              reduce reliance on hidden insider allocation.
+            </p>
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300">
+            Miner Modes
           </p>
-        </div>
-      </div>
 
-      <div className="mt-10 rounded-3xl border border-yellow-400/20 bg-yellow-400/5 p-7">
-        <h2 className="text-2xl font-bold text-yellow-400">
-          Risk Disclaimer
-        </h2>
+          <h2 className="text-3xl font-black tracking-tight">
+            Mining Clients
+          </h2>
 
-        <p className="mt-4 text-gray-300">
-          NonceForge is experimental blockchain infrastructure currently under
-          development. Mining rewards, liquidity conditions, protocol behavior,
-          and token value are not guaranteed. Users should always perform
-          independent research before participating.
-        </p>
+          <p className="mt-4 max-w-4xl text-sm leading-7 text-zinc-400 md:text-base">
+            NonceForge begins with browser mining for accessible onboarding.
+            Dedicated CPU and GPU mining clients are planned for future protocol
+            expansion.
+          </p>
+
+          <div className="mt-7 grid gap-5 md:grid-cols-3">
+            {minerModes.map((item) => (
+              <div
+                key={item.title}
+                className={`rounded-3xl border ${item.border} ${item.bg} p-6`}
+              >
+                <div className={`mb-4 ${item.color}`}>
+                  <Cpu size={28} />
+                </div>
+
+                <p className={`text-sm font-semibold ${item.color}`}>
+                  {item.status}
+                </p>
+
+                <h3 className="mt-3 text-xl font-black text-white">
+                  {item.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-zinc-400">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-white/10 bg-zinc-950/70 p-8 shadow-2xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-lime-300">
+            Smart Contract Readiness
+          </p>
+
+          <h2 className="text-3xl font-black tracking-tight">
+            On-Chain Verification Layer
+          </h2>
+
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {[
+              ["Nonce Validation", "Verify submitted proof on-chain.", Zap],
+              ["Supply Cap", "Prevent minting beyond max supply.", ShieldCheck],
+              ["Epoch State", "Read current epoch from mined supply.", Layers],
+            ].map(([title, text, Icon]: any) => (
+              <div
+                key={title}
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+              >
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-lime-400/20 bg-lime-400/10 text-lime-300">
+                  <Icon size={24} />
+                </div>
+
+                <h3 className="text-xl font-black text-white">{title}</h3>
+
+                <p className="mt-3 text-sm leading-6 text-zinc-400">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-yellow-400/20 bg-yellow-400/5 p-8">
+          <div className="flex flex-col gap-5 md:flex-row md:items-start">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-yellow-400/20 bg-yellow-400/10 text-yellow-300">
+              <AlertTriangle size={24} />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-black text-yellow-300">
+                Risk Disclaimer
+              </h2>
+
+              <p className="mt-4 text-sm leading-7 text-zinc-300 md:text-base">
+                NonceForge is experimental blockchain infrastructure under
+                development. Mining rewards, liquidity conditions, smart
+                contract behavior, and token value are not guaranteed. Users
+                should always perform independent research before participating.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

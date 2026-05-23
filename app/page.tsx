@@ -39,7 +39,7 @@ export default function Home() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
+          <nav className="hidden items-center gap-5 text-sm text-zinc-400 md:flex lg:gap-8">
             <Link href="/mining" className="transition hover:text-lime-300">
               Mining
             </Link>
@@ -49,6 +49,13 @@ export default function Home() {
               className="transition hover:text-lime-300"
             >
               Leaderboard
+            </Link>
+
+            <Link
+              href="/roadmap"
+              className="transition hover:text-lime-300"
+            >
+              Roadmap
             </Link>
 
             <Link
@@ -63,7 +70,7 @@ export default function Home() {
             </Link>
           </nav>
 
-          <div className="w-[90px]" />
+          <div className="hidden w-[40px] md:block" />
         </div>
       </header>
 
